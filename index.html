@@ -2,31 +2,35 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Monroe | Premium Restaurant Kostanay</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Prata&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --accent: #b08d57; /* Золотой акцент */
-            --bg: #0a0a0a;    /* Глубокий черный */
+            --accent: #b08d57;
+            --bg: #0a0a0a;
             --card-bg: #141414;
             --text: #ffffff;
             --font-header: 'Playfair Display', serif;
             --font-main: 'Prata', serif;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body { 
-            font-family: var(--font-main); 
-            background-color: var(--bg); 
-            color: var(--text); 
+        /* Блокируем горизонтальный скролл на корню */
+        html, body { 
+            margin: 0; padding: 0; 
+            width: 100%; max-width: 100%;
+            overflow-x: hidden; 
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font-main);
             scroll-behavior: smooth;
             line-height: 1.6;
         }
 
-        /* Header & Nav */
+        * { box-sizing: border-box; }
+
+        /* Header */
         header {
             display: flex; justify-content: space-between; align-items: center;
             padding: 20px 5%; position: fixed; width: 100%; top: 0; z-index: 1000;
@@ -38,35 +42,31 @@
             padding: 10px 5%;
         }
         
-        .logo-img {
-            height: 60px;
-            width: auto;
-            transition: 0.3s;
-        }
-        header.scrolled .logo-img { height: 45px; }
+        .logo-img { height: 50px; width: auto; transition: 0.3s; }
+        header.scrolled .logo-img { height: 40px; }
 
         nav { display: flex; gap: 30px; }
         nav a { 
             color: white; text-decoration: none; 
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.9rem; letter-spacing: 1px;
+            font-size: 0.8rem; letter-spacing: 1px;
             text-transform: uppercase; transition: 0.3s; 
         }
         nav a:hover { color: var(--accent); }
 
-        /* Hero Section */
+        /* Hero */
         .hero {
             height: 100vh; 
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)), 
                         url('https://s.yimg.com/ny/api/res/1.2/70UPGYQpXqR8Hz6UjniBZw--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD02NzE7Y2Y9d2VicA--/https://media.zenfs.com/en/chowhound_739/989c6cf1ea7704e5e87363b856b0e6ab') no-repeat center center;
             background-size: cover;
             display: flex; align-items: center; justify-content: center; text-align: center;
+            padding: 0 20px;
         }
-
         .hero h1 { 
             font-family: var(--font-header);
-            font-size: clamp(2.5rem, 8vw, 5rem); 
-            letter-spacing: 4px; margin-bottom: 10px; 
+            font-size: clamp(2.5rem, 10vw, 6rem); 
+            letter-spacing: 15px; margin-bottom: 10px; 
             text-transform: uppercase;
         }
         .hero p {
@@ -78,66 +78,64 @@
         .btn-primary {
             background: transparent; color: white; border: 1px solid var(--accent); 
             padding: 15px 40px; font-family: 'Montserrat';
-            font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;
-            cursor: pointer; transition: 0.4s; border-radius: 0;
+            font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+            cursor: pointer; transition: 0.4s;
         }
-        .btn-primary:hover { background: var(--accent); color: black; transform: scale(1.05); }
+        .btn-primary:hover { background: var(--accent); color: black; }
 
         /* Sections */
-        section { padding: 100px 8%; text-align: center; }
+        section { padding: 80px 5%; max-width: 1200px; margin: 0 auto; text-align: center; }
         h2 { 
             font-family: var(--font-header);
-            font-size: 3rem; margin-bottom: 50px; color: var(--accent); 
+            font-size: clamp(2rem, 5vw, 3.5rem); 
+            margin-bottom: 40px; color: var(--accent); 
             text-transform: uppercase; letter-spacing: 3px;
         }
 
-        .about-container { display: flex; align-items: center; gap: 60px; flex-wrap: wrap; text-align: left; }
-        .about-image { flex: 1; min-width: 300px; }
-        .about-image img { width: 100%; border-radius: 5px; filter: grayscale(30%); border: 1px solid #333; }
-        .about-text { flex: 1.2; min-width: 300px; }
-        .about-text p { margin-bottom: 25px; font-size: 1.2rem; color: #bbb; }
+        .about-container { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; text-align: left; }
+        .about-image { flex: 1; min-width: 280px; }
+        .about-image img { width: 100%; border-radius: 2px; border: 1px solid #333; }
+        .about-text { flex: 1.2; min-width: 280px; }
+        .about-text p { margin-bottom: 20px; font-size: 1.1rem; color: #ccc; }
 
-        /* Menu Grid */
-        .menu { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
-        .menu-card { 
-            background: var(--card-bg); padding: 0; border-radius: 0; 
-            transition: 0.5s; border: 1px solid #222; overflow: hidden;
-        }
-        .menu-card:hover { border-color: var(--accent); transform: translateY(-10px); }
-        .menu-card img { width: 100%; height: 250px; object-fit: cover; transition: 0.5s; }
-        .menu-card:hover img { transform: scale(1.1); }
-        .menu-card-info { padding: 25px; }
-        .menu-card h3 { font-family: var(--font-header); font-size: 1.5rem; margin-bottom: 10px; }
-        .menu-card p { color: var(--accent); font-size: 1.3rem; font-weight: 400; }
+        /* Menu */
+        .menu { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .menu-card { background: var(--card-bg); border: 1px solid #222; overflow: hidden; transition: 0.4s; }
+        .menu-card img { width: 100%; height: 250px; object-fit: cover; }
+        .menu-card-info { padding: 20px; }
+        .menu-card h3 { font-family: var(--font-header); font-size: 1.4rem; margin-bottom: 8px; }
+        .menu-card p.desc { font-size: 0.85rem; color: #777; margin-bottom: 10px; height: 40px; }
+        .menu-card p.price { color: var(--accent); font-size: 1.2rem; }
+
+        /* Burger */
+        .burger { display: none; flex-direction: column; gap: 6px; cursor: pointer; z-index: 1100; }
+        .burger span { width: 28px; height: 2px; background: var(--accent); transition: 0.3s; }
 
         /* Form */
-        .contact-form { max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+        .contact-form { max-width: 500px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px; }
         .contact-form input, .contact-form textarea { 
-            padding: 18px; background: #111; border: 1px solid #333; color: white; 
-            font-family: 'Montserrat'; font-size: 1rem;
+            padding: 15px; background: #111; border: 1px solid #333; color: white; 
+            font-family: 'Montserrat'; width: 100%;
         }
-        .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--accent); }
-
-        /* Burger Menu */
-        .burger { display: none; flex-direction: column; gap: 6px; cursor: pointer; }
-        .burger span { width: 30px; height: 2px; background: var(--accent); transition: 0.3s; }
 
         /* Animations */
-        .animate-on-scroll { opacity: 0; transform: translateY(40px); transition: 1s ease-out; }
+        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: all 0.6s ease-out; }
         .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
 
-        footer { padding: 60px; text-align: center; border-top: 1px solid #111; font-family: 'Montserrat'; font-size: 0.8rem; letter-spacing: 2px; color: #444; }
+        footer { padding: 40px; text-align: center; color: #444; font-size: 0.7rem; letter-spacing: 2px; }
 
+        /* Mobile Fixes */
         @media (max-width: 768px) {
             .burger { display: flex; }
             nav {
-                position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
-                background: var(--bg); flex-direction: column; align-items: center;
-                justify-content: center; transition: 0.6s; z-index: 999;
+                position: fixed; top: 0; right: -100%; width: 80%; height: 100vh;
+                background: rgba(10,10,10,0.98); backdrop-filter: blur(10px);
+                flex-direction: column; align-items: center; justify-content: center;
+                transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             }
             nav.active { right: 0; }
-            nav a { font-size: 1.8rem; }
-            .hero h1 { font-size: 3rem; }
+            nav a { font-size: 1.5rem; }
+            .hero h1 { letter-spacing: 8px; }
         }
     </style>
 </head>
@@ -159,11 +157,10 @@
 
 <section class="hero">
     <div class="hero-content animate-on-scroll">
-        <h1 style="letter-spacing: 15px;">MONROE</h1>
-        <p>RESTAURANT & ATMOSPHERE</p>
-        <div style="margin-top: 20px; font-size: 0.9rem; letter-spacing: 3px; color: #888;">KOSTANAY</div>
-        <button class="btn-primary" style="margin-top: 40px;" onclick="document.getElementById('menu').scrollIntoView({ behavior: 'smooth' })">
-            Забронировать стол
+        <h1>MONROE</h1>
+        <p>Restaurant & Atmosphere</p>
+        <button class="btn-primary" onclick="document.getElementById('menu').scrollIntoView({ behavior: 'smooth' })">
+            Открыть меню
         </button>
     </div>
 </section>
@@ -174,100 +171,100 @@
             <img src="https://cdn20.pamono.com/p/z/1/1/1173900_69iiqyoo8t/marilyn-monroe-posing-in-studio-1950s-photograph-3.jpg" alt="Style">
         </div>
         <div class="about-text">
-            <h2>Легенда в Костанае</h2>
-            <p>✨ Monroe — это симбиоз классического стиля и современной гастрономии. Мы создали пространство, где время замедляется.</p>
-            <p>🥂 Каждое блюдо — это шедевр, созданный для ценителей истинного качества и эстетики.</p>
+            <h2>Легенда Костаная</h2>
+            <p>Monroe — это место, где гастрономия встречается с искусством. Мы создали атмосферу, в которой каждый гость чувствует себя особенным.</p>
             <button class="btn-primary" onclick="document.getElementById('contacts').scrollIntoView({ behavior: 'smooth' })">
-                Забронировать вечер
+                Забронировать стол
             </button>
         </div>
     </div>
 </section>
 
 <section id="menu">
-    <h2>Гастрономические хиты</h2>
+    <h2>Избранное</h2>
     <div class="menu">
         <div class="menu-card animate-on-scroll">
             <img src="баклажаны.jpg" alt="Хрустящие баклажаны">
             <div class="menu-card-info">
-                <h3>Хрустящие баклажаны</h3>
-                <p style="font-size: 0.9rem; color: #888; margin-bottom: 10px;">Со страчателлой, черри, кинзой и кисло-сладким соусом</p>
-                <p>₸ 3 200</p>
+                <h3>Баклажаны</h3>
+                <p class="desc">Со страчателлой и черри</p>
+                <p class="price">₸ 3 200</p>
             </div>
         </div>
-
         <div class="menu-card animate-on-scroll">
-            <img src="телятина.png" alt="Салат из мраморной телятины">
+            <img src="телятина.png" alt="Мраморная телятина">
             <div class="menu-card-info">
-                <h3>Мраморная телятина</h3>
-                <p style="font-size: 0.9rem; color: #888; margin-bottom: 10px;">С грейпфрутом, ростбифом, черри и азиатским соусом</p>
-                <p>₸ 4 500</p>
+                <h3>Телятина</h3>
+                <p class="desc">С грейпфрутом и азиатским соусом</p>
+                <p class="price">₸ 4 500</p>
             </div>
         </div>
-
         <div class="menu-card animate-on-scroll">
-            <img src="цезарь.png" alt="Цезарь с курицей">
+            <img src="цезарь.png" alt="Цезарь">
             <div class="menu-card-info">
-                <h3>Цезарь Classic</h3>
-                <p style="font-size: 0.9rem; color: #888; margin-bottom: 10px;">Айсберг, гренки, черри и фирменный соус Monroe</p>
-                <p>₸ 3 800</p>
+                <h3>Цезарь</h3>
+                <p class="desc">Классика в стиле Monroe</p>
+                <p class="price">₸ 3 800</p>
             </div>
         </div>
     </div>
 </section>
 
 <section id="contacts">
-    <h2>Резерв стола</h2>
+    <h2>Резерв</h2>
     <form class="contact-form" id="whatsappForm">
         <input type="text" id="name" placeholder="Ваше имя" required>
         <input type="tel" id="phone" placeholder="Ваш телефон" required>
-        <textarea id="order" rows="4" placeholder="Количество гостей и желаемое время"></textarea>
-        <button type="button" class="btn-primary" onclick="sendToWhatsApp()">Отправить запрос в WhatsApp</button>
+        <textarea id="order" rows="3" placeholder="Дата, время и количество гостей"></textarea>
+        <button type="button" class="btn-primary" onclick="sendToWhatsApp()">Отправить в WhatsApp</button>
     </form>
 </section>
 
 <footer>
-    <p>© 2026 FORFAX.WEB — DIGITAL SOLUTIONS FOR BUSINESS</p>
+    <p>© 2026 FORFAX.WEB — KOSTANAY</p>
 </footer>
 
 <script>
+    function toggleMenu() {
+        document.getElementById('burger').classList.toggle('active');
+        document.getElementById('navLinks').classList.toggle('active');
+    }
+
+    document.getElementById('burger').addEventListener('click', toggleMenu);
+
     function sendToWhatsApp() {
-        const phoneNumber = "77777777777"; // ВСТАВЬ СЮДА СВОЙ НОМЕР
+        const phoneNumber = "77777777777"; // СЮДА СВОЙ НОМЕР
         const name = document.getElementById('name').value;
         const phone = document.getElementById('phone').value;
         const order = document.getElementById('order').value;
 
         if (!name || !phone) {
-            alert("Пожалуйста, заполните основные поля");
+            alert("Пожалуйста, заполните данные");
             return;
         }
 
-        const message = `*Новая заявка MONROE*%0A*Имя:* ${name}%0A*Телефон:* ${phone}%0A*Детали:* ${order}`;
+        const message = `*Заявка MONROE*%0A*Имя:* ${name}%0A*Телефон:* ${phone}%0A*Инфо:* ${order}`;
         window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
     }
 
-    const burger = document.getElementById('burger');
-    const navLinks = document.getElementById('navLinks');
-
-    function toggleMenu() {
-        burger.classList.toggle('active');
-        navLinks.classList.toggle('active');
+    function animateOnScroll() {
+        const elements = document.querySelectorAll('.animate-on-scroll');
+        elements.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.9) {
+                el.classList.add('visible');
+            }
+        });
     }
-
-    burger.addEventListener('click', toggleMenu);
 
     window.addEventListener('scroll', () => {
         const header = document.getElementById('header');
         window.scrollY > 50 ? header.classList.add('scrolled') : header.classList.remove('scrolled');
-        
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
-            if (el.getBoundingClientRect().top - window.innerHeight <= -100) {
-                el.classList.add('visible');
-            }
-        });
+        animateOnScroll();
     });
+
+    window.addEventListener('load', animateOnScroll);
 </script>
 
 </body>
-
 </html>
