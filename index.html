@@ -125,8 +125,10 @@
         footer { padding: 40px; text-align: center; color: #444; font-size: 0.7rem; letter-spacing: 2px; }
 
         /* Mobile Fixes */
+        /* Mobile Fixes */
         @media (max-width: 768px) {
             .burger { display: flex; }
+            
             nav {
                 position: fixed; top: 0; right: -100%; width: 80%; height: 100vh;
                 background: rgba(10,10,10,0.98); backdrop-filter: blur(10px);
@@ -135,7 +137,39 @@
             }
             nav.active { right: 0; }
             nav a { font-size: 1.5rem; }
-            .hero h1 { letter-spacing: 8px; }
+            
+            .hero h1 { letter-spacing: 8px; font-size: 2.5rem !important; }
+
+            /* Магия слайдера ТОЛЬКО для мобилок */
+            .menu {
+                display: flex; /* Выстраиваем в ряд */
+                overflow-x: auto; /* Включаем горизонтальный скролл */
+                scroll-snap-type: x mandatory; 
+                gap: 15px;
+                padding: 20px 5%; /* Небольшой отступ слева, чтобы карточка не липла к краю */
+                text-align: left;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none; /* Убираем скроллбар в Firefox */
+            }
+
+            .menu::-webkit-scrollbar {
+                display: none; /* Убираем скроллбар в Chrome/Safari */
+            }
+
+            .menu-card {
+                flex: 0 0 85%; /* Сделал чуть шире (85%), чтобы было солиднее */
+                scroll-snap-align: center; /* Карточка будет вставать ровно по центру */
+                margin-bottom: 0;
+            }
+            
+            /* Чтобы секция меню не была слишком широкой из-за флекса */
+            #menu {
+                padding-left: 0;
+                padding-right: 0;
+            }
+            #menu h2 {
+                padding: 0 5%;
+            }
         }
     </style>
 </head>
@@ -268,3 +302,4 @@
 
 </body>
 </html>
+
